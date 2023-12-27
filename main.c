@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <ctype.h>
+#include "Langton.h"
 
 int main(int argc, char** argv){
 	int wiersze = 10;
@@ -15,7 +16,7 @@ int main(int argc, char** argv){
 
 
 	int opcja;
-	while((opcja = getopt(argc, argv, "m:n:i:d:f:")) != -1){
+	while((opcja = getopt(argc, argv, "m:n:i:d:f:r:u:")) != -1){
 		switch(opcja){
 			case 'm':
 				wiersze = atoi(optarg);
@@ -66,6 +67,7 @@ int main(int argc, char** argv){
 		fprintf(stderr, "przedrostek_pliku= %s\n", przedrostek_pliku);
 	if( czy_losowo != 0)
 		fprintf(stderr, "parametr losowania przeszkod = %lf\n", procent_przeszkod);
-
+	
+	Langton(wiersze, kolumny, l_iteracji, kierunek_poczatkowy, przedrostek_pliku, czy_losowo, procent_przeszkod );
 return 0;
 }
