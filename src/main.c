@@ -14,7 +14,7 @@ int main(int argc, char** argv){
 	double procent_przeszkod;
 	char* mapa = NULL;
 
-
+	int licznik_trybow = 0;
 	int opcja;
 	while((opcja = getopt(argc, argv, "m:n:i:d:f:r:u:")) != -1){
 		switch(opcja){
@@ -50,16 +50,20 @@ int main(int argc, char** argv){
 				przedrostek_pliku = optarg;
 				break;
 			case 'r':
-				if( atof(optarg) > 0 && atof(optarg) < 1){
+				if( atof(optarg) > 0 && atof(optarg) < 1 && licznik_trybow = 0){
 					czy_losowo = 1;
 					procent_przeszkod = atof(optarg);
+					licznik_trybow++;
 				} else {
-					fprintf(stderr, "Tryb losowy wymaga argumentu pomiędzy 0 a 1\n");
+					fprintf(stderr, "Tryb losowy wymaga argumentu pomiędzy 0 a 1 oraz nie może być aktywowany jednocześnie z opcją wczytania mapy.\n");
 					exit(1);
 				}
 				break;
 			case 'u':
-				mapa = optarg;
+				if(licznik_trybow = 0)
+					mapa = optarg;
+				else
+					fprintf(stderr, "Tryb wczytania mapy nie może być aktywowany jednocześnie z opcją losowej planszy.\n");
 				break;
 			case '?':
 				if ((optopt == 'm')||(optopt == 'n')||(optopt == 'l'))
@@ -88,7 +92,6 @@ return 0;
 }
 
 /* DO ZROBIENIA:
- *   chodzenie po ścianach?
  *   rozłączność losowania i wczytywania
  *   drukowanie
  *   wczytywanie (i jakaś testowa załączona)
