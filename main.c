@@ -67,7 +67,17 @@ int main(int argc, char** argv){
 		fprintf(stderr, "przedrostek_pliku= %s\n", przedrostek_pliku);
 	if( czy_losowo != 0)
 		fprintf(stderr, "parametr losowania przeszkod = %lf\n", procent_przeszkod);
-	
-	Langton(wiersze, kolumny, l_iteracji, kierunek_poczatkowy, przedrostek_pliku, czy_losowo, procent_przeszkod );
+	if( mapa != 0)
+		fprintf(stderr, "nazwa wczytywanej mapy: %s\n", mapa);	
+	Langton(wiersze, kolumny, l_iteracji, kierunek_poczatkowy, przedrostek_pliku, czy_losowo, procent_przeszkod, mapa);
 return 0;
 }
+
+/* DO ZROBIENIA:
+ *   komunikaty czy odpowiednie argumenty
+ *   rozłączność losowania i wczytywania
+ *   losowanie
+ *   wczytywanie (i jakaś testowa załączona)
+ *   drukowanie
+ *   sprawozdanie
+ *   Makefile

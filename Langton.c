@@ -1,11 +1,19 @@
 #include"Langton.h"
 #include"druk.h"
 
-int Langton(int wiersze, int kolumny,int  l_iteracji, char kierunek_poczatkowy, char* przedrostek_pliku, int czy_losowo, double procent_przeszkod ){
-	int* plansza = calloc(wiersze*kolumny, sizeof(plansza));
+void losulosu(int wiersze, int kolumny, int* plansza, double procent_przeszkod){
+	;
+}
+
+int Langton(int wiersze, int kolumny,int  l_iteracji, char kierunek_poczatkowy, char* przedrostek_pliku, int czy_losowo, double procent_przeszkod, char* mapa ){
+	
+	int* plansza = mapa == NULL ? calloc(wiersze*kolumny, sizeof(plansza)) : wczytaj(char* mapa);
 	char kierunek = kierunek_poczatkowy;
 	int x = wiersze/2;
 	int y = kolumny/2;
+
+	if(czy_losowo != 0)
+		losulosu(int wiersze, int kolumny, int* plansza, double procent_przeszkod);
 
 	for(int i = 0; i<l_iteracji; i++){
 
@@ -53,7 +61,7 @@ int Langton(int wiersze, int kolumny,int  l_iteracji, char kierunek_poczatkowy, 
 					break;
 		}
 
-		druk(wiersze, kolumny, x, y, plansza);
+		druk(wiersze, kolumny, x, y, plansza, przedrostek_pliku);
 	}	
 
 return 0;
