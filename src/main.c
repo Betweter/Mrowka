@@ -20,12 +20,24 @@ int main(int argc, char** argv){
 		switch(opcja){
 			case 'm':
 				wiersze = atoi(optarg);
+				if(wiersze < 0){
+					fprintf(stderr,"Argument -%c powinien być całkowitą liczbą dodatnią\n", optopt);
+					exit(1)
+				}
 				break;
 			case 'n':
 				kolumny = atoi(optarg);
+				if(kolumny < 0){
+					fprintf(stderr,"Argument -%c powinien być całkowitą liczbą dodatnią\n", optopt);
+					exit(1)
+				}
 				break;
 			case 'i':
 				l_iteracji = atoi(optarg);
+				if(l_iteracji < 0){
+					fprintf(stderr,"Argument -%c powinien być całkowitą liczbą dodatnią\n", optopt);
+					exit(1)
+				}
 				break;
 			case 'd':
 				kierunek_poczatkowy = *optarg;
@@ -69,14 +81,16 @@ int main(int argc, char** argv){
 		fprintf(stderr, "parametr losowania przeszkod = %lf\n", procent_przeszkod);
 	if( mapa != 0)
 		fprintf(stderr, "nazwa wczytywanej mapy: %s\n", mapa);	
+	
 	Langton(wiersze, kolumny, l_iteracji, kierunek_poczatkowy, przedrostek_pliku, czy_losowo, procent_przeszkod, mapa);
+
 return 0;
 }
 
 /* DO ZROBIENIA:
- *   komunikaty czy odpowiednie argumenty
+ *   chodzenie po ścianach?
  *   rozłączność losowania i wczytywania
- *   wczytywanie (i jakaś testowa załączona)
  *   drukowanie
- *   sprawozdanie
+ *   wczytywanie (i jakaś testowa załączona)
  *   Makefile
+ *   sprawozdanie
