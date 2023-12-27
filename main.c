@@ -76,7 +76,6 @@ return 0;
 /* DO ZROBIENIA:
  *   komunikaty czy odpowiednie argumenty
  *   rozłączność losowania i wczytywania
- *   losowanie
  *   wczytywanie (i jakaś testowa załączona)
  *   drukowanie
  *   sprawozdanie
