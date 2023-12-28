@@ -11,81 +11,88 @@ void losulosu(int wiersze, int kolumny, int* plansza, double procent_przeszkod){
 		
 }
 
-void biale(int* x, int* y, char* kierunek, int* plansza, int wiersze, int kolumny){
+void biale(int* x, int* y, int* kierunek, int* plansza, int wiersze, int kolumny){
 	plansza[ (*x) * wiersze + *y] = 1;
-	switch(kierunek){
-		case 'N':
-			*kierunek = 'E';
+	switch(*kierunek){
+		case 0:
+			*kierunek = 1;
 			if( *x < kolumny )
-				*x++;
+				(*x)++;
 			else
 				*x = 0;
 			break;
-		case 'E':
-			*kierunek = 'S';
+		case 1:
+			*kierunek = 2;
 			if( *y > 0 )
-				*y--;
+				(*y)--;
 			else
 				*y = wiersze;
 			break;
-		case 'S':
-			*kierunek = 'W';
+		case 2:
+			*kierunek = 3;
 			if(*x > 0)
-				*x--;
+				(*x)--;
 			else
 				*x = kolumny;
 			break;
-		case 'W':
-			*kierunek = 'N';
+		case 3:
+			*kierunek = 0;
 			if(*y < wiersze)
-				*y++;
+				(*y)++;
 			else
 				*y = 0;
 			break;
+	}
 }
 
-void czarne(int* x, int* y, char* kierunek, int* plansza, int wiersze, int kolumny){
+void czarne(int* x, int* y, int* kierunek, int* plansza, int wiersze, int kolumny){
 	plansza[ (*x) * wiersze + *y] = 0;
-	switch(kierunek){
-		case 'N':
-			*kierunek = 'W';
+	switch(*kierunek){
+		case 0:
+			*kierunek = 3;
 			if( *x > 0 )
-				*x--;
+				(*x)--;
 			else
 				*x = kolumny;
 			break;
-		case 'E':
-			*kierunek = 'N';
+		case 1:
+			*kierunek = 0;
 			if( *y < wiersze )
-				*y++;
+				(*y)++;
 			else
 				*y = 0;
 			break;
-		case 'S':
-			*kierunek = 'E';
+		case 2:
+			*kierunek = 1;
 			if(*x < kolumny)
-				*x++;
+				(*x)++;
 			else
 				*x = 0;
 			break;
-		case 'W':
-			*kierunek = 'S';
+		case 3:
+			*kierunek = 2;
 			if(*y > 0)
-				*y--;
+				(*y)--;
 			else
 				*y = wiersze;
 			break;
+	}
+}
+
+int kier_zmian(char kierunek_poczatkowy){
+	char k = kierunek_poczatkowy;
+	return k == 'N' ? 0 : k == 'E' ? 1 : k == 'S' ? 2: 3;
 }
 
 int Langton(int wiersze, int kolumny,int  l_iteracji, char kierunek_poczatkowy, char* przedrostek_pliku, int czy_losowo, double procent_przeszkod, char* mapa ){
 	
 	int* plansza = mapa == NULL ? calloc(wiersze*kolumny, sizeof(plansza)) : wczytaj(mapa, &wiersze, &kolumny, &kierunek_poczatkowy);
-	char kierunek = kierunek_poczatkowy;
+	int kierunek = kier_zmian(kierunek_poczatkowy);
 	int x = wiersze/2;
 	int y = kolumny/2;
 
 	if(czy_losowo != 0)
-		losulosu(int wiersze, int kolumny, int* plansza, double procent_przeszkod);
+		losulosu(wiersze, kolumny, plansza, procent_przeszkod);
 
 	for(int i = 0; i<l_iteracji; i++){
 
@@ -94,7 +101,7 @@ int Langton(int wiersze, int kolumny,int  l_iteracji, char kierunek_poczatkowy, 
 		else
 			czarne(&x, &y, &kierunek, plansza, wiersze, kolumny);
 			
-		druk(wiersze, kolumny, x, y, plansza, przedrostek_pliku);
+		druk(wiersze, kolumny, x, y, plansza, przedrostek_pliku, i);
 	}	
 
 return 0;

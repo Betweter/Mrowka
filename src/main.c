@@ -5,9 +5,9 @@
 #include "Langton.h"
 
 int main(int argc, char** argv){
-	int wiersze = 10;
-	int kolumny = 10;
-	int l_iteracji = 1000;
+	int wiersze = 50;
+	int kolumny = 50;
+	int l_iteracji = 200;
 	char kierunek_poczatkowy = 'N';
 	char* przedrostek_pliku = NULL;
 	int czy_losowo = 0;
@@ -22,21 +22,21 @@ int main(int argc, char** argv){
 				wiersze = atoi(optarg);
 				if(wiersze < 0){
 					fprintf(stderr,"Argument -%c powinien być całkowitą liczbą dodatnią\n", optopt);
-					exit(1)
+					exit(1);
 				}
 				break;
 			case 'n':
 				kolumny = atoi(optarg);
 				if(kolumny < 0){
 					fprintf(stderr,"Argument -%c powinien być całkowitą liczbą dodatnią\n", optopt);
-					exit(1)
+					exit(1);
 				}
 				break;
 			case 'i':
 				l_iteracji = atoi(optarg);
 				if(l_iteracji < 0){
 					fprintf(stderr,"Argument -%c powinien być całkowitą liczbą dodatnią\n", optopt);
-					exit(1)
+					exit(1);
 				}
 				break;
 			case 'd':
@@ -50,7 +50,7 @@ int main(int argc, char** argv){
 				przedrostek_pliku = optarg;
 				break;
 			case 'r':
-				if( atof(optarg) > 0 && atof(optarg) < 1 && licznik_trybow = 0){
+				if( atof(optarg) > 0 && atof(optarg) < 1 && licznik_trybow == 0){
 					czy_losowo = 1;
 					procent_przeszkod = atof(optarg);
 					licznik_trybow++;
@@ -60,7 +60,7 @@ int main(int argc, char** argv){
 				}
 				break;
 			case 'u':
-				if(licznik_trybow = 0)
+				if(licznik_trybow == 0)
 					mapa = optarg;
 				else
 					fprintf(stderr, "Tryb wczytania mapy nie może być aktywowany jednocześnie z opcją losowej planszy.\n");
@@ -92,8 +92,8 @@ return 0;
 }
 
 /* DO ZROBIENIA:
- *   rozłączność losowania i wczytywania
  *   drukowanie
  *   wczytywanie (i jakaś testowa załączona)
  *   Makefile
  *   sprawozdanie
+ */
