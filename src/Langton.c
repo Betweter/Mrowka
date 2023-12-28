@@ -86,7 +86,7 @@ int kier_zmian(char kierunek_poczatkowy){
 
 int Langton(int wiersze, int kolumny,int  l_iteracji, char kierunek_poczatkowy, char* przedrostek_pliku, int czy_losowo, double procent_przeszkod, char* mapa ){
 	
-	int* plansza = mapa == NULL ? calloc(wiersze*kolumny, sizeof(plansza)) : wczytaj(mapa, &wiersze, &kolumny, &kierunek_poczatkowy);
+	int* plansza = mapa == NULL ? calloc(wiersze*kolumny, sizeof(plansza)) : wczytaj(mapa, &wiersze, &kolumny, &kierunek_poczatkowy, &x, &y);
 	int kierunek = kier_zmian(kierunek_poczatkowy);
 	int x = wiersze/2;
 	int y = kolumny/2;

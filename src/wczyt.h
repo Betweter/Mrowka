@@ -5,6 +5,6 @@
 #include <wchar.h>
 #include <locale.h>
 
-int* wczytaj(char* mapa, int* wiersze, int* kolumny, char* kierunek_poczatkowy);
+int* wczytaj(char* mapa, int* wiersze, int* kolumny, char* kierunek_poczatkowy, int* x, int* y);
 
 #endif
