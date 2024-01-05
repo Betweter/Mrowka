@@ -4,6 +4,19 @@
 #include <ctype.h>
 #include "Langton.h"
 
+int czyLiczba (char* wyr){
+
+	if( wyr == NULL || *wyr == '\0')
+		return 0;
+
+	while (*wyr) {
+		if (*wyr < '0' || *wyr > '9')
+			return 0;
+		wyr++;
+	}
+	return 1;
+}
+
 int main(int argc, char** argv){
 	int wiersze = 50;
 	int kolumny = 50;
@@ -19,23 +32,26 @@ int main(int argc, char** argv){
 	while((opcja = getopt(argc, argv, "m:n:i:d:f:r:u:")) != -1){
 		switch(opcja){
 			case 'm':
-				wiersze = atoi(optarg);
-				if(wiersze < 0){
-					fprintf(stderr,"Argument -%c powinien być całkowitą liczbą dodatnią\n", optopt);
+				if( czyLiczba(optarg) )
+					wiersze = atoi(optarg);
+				else {
+					fprintf(stderr,"Argument -m powinien być całkowitą liczbą dodatnią\n");
 					exit(1);
 				}
 				break;
 			case 'n':
-				kolumny = atoi(optarg);
-				if(kolumny < 0){
-					fprintf(stderr,"Argument -%c powinien być całkowitą liczbą dodatnią\n", optopt);
+				if( czyLiczba(optarg) )
+					kolumny = atoi(optarg);
+				else {
+					fprintf(stderr,"Argument -n powinien być całkowitą liczbą dodatnią\n");
 					exit(1);
 				}
 				break;
 			case 'i':
-				l_iteracji = atoi(optarg);
-				if(l_iteracji < 0){
-					fprintf(stderr,"Argument -%c powinien być całkowitą liczbą dodatnią\n", optopt);
+				if( czyLiczba(optarg) )
+					l_iteracji = atoi(optarg);
+				else {
+					fprintf(stderr,"Argument -i powinien być całkowitą liczbą dodatnią\n");
 					exit(1);
 				}
 				break;
