@@ -11,7 +11,7 @@ void losulosu(int wiersze, int kolumny, int* plansza, double procent_przeszkod){
 		
 }
 
-void biale(int* x, int* y, int* kierunek, int* plansza, int wiersze, int kolumny){
+int biale(int* x, int* y, int* kierunek, int* plansza, int wiersze, int kolumny){
 	plansza[ (*x) * wiersze + *y] = 1;
 	switch(*kierunek){
 		case 0:
@@ -19,33 +19,34 @@ void biale(int* x, int* y, int* kierunek, int* plansza, int wiersze, int kolumny
 			if( *x < kolumny )
 				(*x)++;
 			else
-				*x = 0;
+				return 1;
 			break;
 		case 1:
 			*kierunek = 2;
 			if( *y > 0 )
 				(*y)--;
 			else
-				*y = wiersze;
+				return 1;
 			break;
 		case 2:
 			*kierunek = 3;
 			if(*x > 0)
 				(*x)--;
 			else
-				*x = kolumny;
+				return 1;
 			break;
 		case 3:
 			*kierunek = 0;
 			if(*y < wiersze)
 				(*y)++;
 			else
-				*y = 0;
+				return 1;
 			break;
 	}
+	return 0;
 }
 
-void czarne(int* x, int* y, int* kierunek, int* plansza, int wiersze, int kolumny){
+int czarne(int* x, int* y, int* kierunek, int* plansza, int wiersze, int kolumny){
 	plansza[ (*x) * wiersze + *y] = 0;
 	switch(*kierunek){
 		case 0:
@@ -53,30 +54,31 @@ void czarne(int* x, int* y, int* kierunek, int* plansza, int wiersze, int kolumn
 			if( *x > 0 )
 				(*x)--;
 			else
-				*x = kolumny;
+				return 1;
 			break;
 		case 1:
 			*kierunek = 0;
 			if( *y < wiersze )
 				(*y)++;
 			else
-				*y = 0;
+				return 1;
 			break;
 		case 2:
 			*kierunek = 1;
 			if(*x < kolumny)
 				(*x)++;
 			else
-				*x = 0;
+				return 1;
 			break;
 		case 3:
 			*kierunek = 2;
 			if(*y > 0)
 				(*y)--;
 			else
-				*y = wiersze;
+				return 1;
 			break;
 	}
+	return 0;
 }
 
 int kier_zmian(char kierunek_poczatkowy){
@@ -95,15 +97,19 @@ int Langton(int wiersze, int kolumny,int  l_iteracji, char kierunek_poczatkowy, 
 	if(czy_losowo != 0)
 		losulosu(wiersze, kolumny, plansza, procent_przeszkod);
 
-	druk(wiersze, kolumny, x, y, plansza, przedrostek_pliku, 0);
 	
+	druk(wiersze, kolumny, x, y, plansza, przedrostek_pliku, 0);
 	for(int i = 0; i<l_iteracji; i++){
 
-		if ( plansza[x*wiersze + y] == 0)
-			biale(&x, &y, &kierunek, plansza, wiersze, kolumny);
-		else
-			czarne(&x, &y, &kierunek, plansza, wiersze, kolumny);
-			
+		if ( plansza[x*wiersze + y] == 0){
+			if ( biale(&x, &y, &kierunek, plansza, wiersze, kolumny) == 1)
+				return 1;
+				
+		} else {
+			if ( czarne(&x, &y, &kierunek, plansza, wiersze, kolumny) == 1)
+				return 1;
+				
+		}
 		druk(wiersze, kolumny, x, y, plansza, przedrostek_pliku, i);
 	}	
 
