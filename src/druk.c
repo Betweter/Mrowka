@@ -84,7 +84,7 @@ void mapa(int wiersze, int kolumny, int x, int y, int kierunek, int* plansza, FI
 		}
 		fprintf(out, "\n");
 	}
-	fprintf(out, "\n");
+
 }
 
 void druk(int wiersze, int kolumny, int x, int y, int kierunek, int* plansza, char* przedrostek_pliku, int i){
@@ -110,5 +110,5 @@ void druk(int wiersze, int kolumny, int x, int y, int kierunek, int* plansza, ch
 	if (przedrostek_pliku != NULL) {
         	fclose(out);
     	}
-	fprintf(out, "iteracja %d\n", i+1);
+	fprintf(out, "iteracja %d\n\n", i+1);
 }
