@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <ctype.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include "Langton.h"
 
 int czyLiczba (char* wyr){
@@ -95,8 +97,10 @@ int main(int argc, char** argv){
 	}
 	
 	fprintf(stderr, "wierszy=%d, kolumn=%d, iteracji=%d, kierunek=%c\n", wiersze, kolumny, l_iteracji, kierunek_poczatkowy);
-	if( przedrostek_pliku != NULL)
+	if( przedrostek_pliku != NULL){
+		mkdir( przedrostek_pliku, 0777);
 		fprintf(stderr, "przedrostek_pliku= %s\n", przedrostek_pliku);
+	}
 	if( czy_losowo != 0)
 		fprintf(stderr, "parametr losowania przeszkod = %lf\n", procent_przeszkod);
 	if( mapa != 0)

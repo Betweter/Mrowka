@@ -92,7 +92,7 @@ void druk(int wiersze, int kolumny, int x, int y, int kierunek, int* plansza, ch
 	FILE *out;
 	if (przedrostek_pliku != NULL) {
         	char plik[100];
-        	sprintf(plik, "%s_%d.txt", przedrostek_pliku, i+1);
+        	sprintf(plik, "%s/%s_%d.txt", przedrostek_pliku, przedrostek_pliku, i+1);
         
         	out = fopen(plik, "w");
 
@@ -107,8 +107,9 @@ void druk(int wiersze, int kolumny, int x, int y, int kierunek, int* plansza, ch
     	
 	mapa(wiersze, kolumny, x, y, kierunek, plansza, out);
 	
+	fprintf(out, "iteracja %d\n\n", i+1);
+	
 	if (przedrostek_pliku != NULL) {
         	fclose(out);
     	}
-	fprintf(out, "iteracja %d\n\n", i+1);
 }
