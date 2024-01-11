@@ -96,7 +96,7 @@ int main(int argc, char** argv){
 		}
 	}
 	
-	fprintf(stderr, "wierszy=%d, kolumn=%d, iteracji=%d, kierunek=%c\n", wiersze, kolumny, l_iteracji, kierunek_poczatkowy);
+	//fprintf(stderr, "wierszy=%d, kolumn=%d, iteracji=%d, kierunek=%c\n", wiersze, kolumny, l_iteracji, kierunek_poczatkowy);
 	if( przedrostek_pliku != NULL){
 		mkdir( przedrostek_pliku, 0777);
 		fprintf(stderr, "przedrostek_pliku= %s\n", przedrostek_pliku);

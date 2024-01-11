@@ -112,6 +112,7 @@ int Langton(int wiersze, int kolumny,int  l_iteracji, char kierunek_poczatkowy, 
 				return 1;
 			}
 		}
+		
 		druk(wiersze, kolumny, x, y, kierunek, plansza, przedrostek_pliku, i);
 	}	
 
