@@ -26,22 +26,51 @@ int* wczytaj(char* mapa, int* wiersze, int* kolumny, char* kierunek_poczatkowy, 
 	//sprawdzanie jakiego koloru jest dana komórka (trzeba omijać rogi i pipe'y
 	//jeśli nie jest kwadratem to jest mrówką, switch jaką i z tego rzeczy
 	
-	long int a = 0;//to będzie aktualna komórka
+	/*long int a = 0;//to będzie aktualna komórka
 	
-	for(int i = 0; i<wiersze; i++){
+	for(int i = 0; i<(*wiersze); i++){
 	
-	//omijamy linijkę (daszki)
-	//while (znak != \0 lub \n)
-	//if( znak != | )
-	//	sprawdzamy czy B, czy W, czy coś innego
-	//	jeśli B albo W to zapisujemy mapa1[a] = 0 lub 1;
-	//	a++;
-	//	jeśli jest to coś innego
-	//	no to switch jaka mrówka
-	//	zapisujemy jak wyżej (czy pole białe czy czarne i przesuwamy a)
-	//	określamy x,y mrówki, oraz kierunek_poczatkowy
-	
-	}
+		fgets(bufor, sizeof(bufor), in);
+		fgets(bufor, sizeof(bufor), in);
+		for (int j = 0; bufor[j] != '\0' && bufor[j] != '\n'; j++){
+			if (bufor[j] != '│') {
+				if (bufor[j] == '█') {
+				    mapa1[a] = 1;
+				} else if (bufor[j] == ' ') {
+				    mapa1[a] = 0;
+				} else {
+				    if (bufor[j] == '▲') {
+					*kierunek_poczatkowy = 'N';
+					mapa1[a] = 1;
+				    } else if (bufor[j] == '▶') {
+					*kierunek_poczatkowy = 'E';
+					mapa1[a] = 1;
+				    } else if (bufor[j] == '▼') {
+					*kierunek_poczatkowy = 'S';
+					mapa1[a] = 1;
+				    } else if (bufor[j] == '◀') {
+					*kierunek_poczatkowy = 'W';
+					mapa1[a] = 1;
+				    } else if (bufor[j] == '△') {
+					*kierunek_poczatkowy = 'N';
+					mapa1[a] = 0;
+				    } else if (bufor[j] == '▷') {
+					*kierunek_poczatkowy = 'E';
+					mapa1[a] = 0;
+				    } else if (bufor[j] == '▽') {
+					*kierunek_poczatkowy = 'S';
+					mapa1[a] = 0;
+				    } else if (bufor[j] == '◁') {
+					*kierunek_poczatkowy = 'W';
+					mapa1[a] = 0;
+				    }
+				    *x = a - i * (*kolumny);
+				    *y = i;
+				}
+				a++;
+		    	}
+		}
+	}*/
 
 	fclose(in);
 	return mapa1;
