@@ -4,6 +4,16 @@ int* wczytaj(char* mapa, int* wiersze, int* kolumny, char* kierunek_poczatkowy, 
 	FILE *in = fopen(mapa, "r");
 
 	//liczenie znaków w pierwszej linii i na podstawie tego określenie wartości "kolumny"
+	char bufor[1024];
+	if(fgets(buforr, sizeof(bufor), in) != NULL){
+		*kolumny = 0;
+		while (bufor[*kolumny] != '\0' && bufor[*kolumny] != '\n')
+			(*kolumny)++;
+		*kolumny /= 3;
+	}
+	fprintf(stderr,"kolumny = %d\n");
+
+
 	//liczenie linii pliku i na podstawie tego określenie wartości "wiersze"
 	//rewind
 	int* mapa1 = malloc( wiersze * kolumny * sizeof(int));//fjashjfgvoasfhgjio	
