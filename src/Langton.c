@@ -103,10 +103,12 @@ int Langton(int wiersze, int kolumny,int  l_iteracji, char kierunek_poczatkowy, 
 
 		if ( plansza[y*kolumny + x] == 0){
 			if ( biale(&x, &y, &kierunek, plansza, wiersze, kolumny) == 1)
+				fprintf(stderr, "Mrówka weszła w ścianę :(\n");
 				return 1;
 				
 		} else {
 			if ( czarne(&x, &y, &kierunek, plansza, wiersze, kolumny) == 1)
+				fprintf(stderr, "Mrówka weszła w ścianę :(\n");
 				return 1;
 				
 		}
