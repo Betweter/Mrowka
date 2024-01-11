@@ -12,7 +12,7 @@ void losulosu(int wiersze, int kolumny, int* plansza, double procent_przeszkod){
 }
 
 int biale(int* x, int* y, int* kierunek, int* plansza, int wiersze, int kolumny){
-	plansza[ (*x) * kolumny + *y] = 1;
+	plansza[ (*y) * kolumny + *x] = 1;
 	switch(*kierunek){
 		case 0:
 			*kierunek = 1;
@@ -23,8 +23,8 @@ int biale(int* x, int* y, int* kierunek, int* plansza, int wiersze, int kolumny)
 			break;
 		case 1:
 			*kierunek = 2;
-			if( *y > 0 )
-				(*y)--;
+			if( *y < wiersze )
+				(*y)++;
 			else
 				return 1;
 			break;
@@ -37,8 +37,8 @@ int biale(int* x, int* y, int* kierunek, int* plansza, int wiersze, int kolumny)
 			break;
 		case 3:
 			*kierunek = 0;
-			if(*y < wiersze)
-				(*y)++;
+			if(*y > 0)
+				(*y)--;
 			else
 				return 1;
 			break;
@@ -47,7 +47,7 @@ int biale(int* x, int* y, int* kierunek, int* plansza, int wiersze, int kolumny)
 }
 
 int czarne(int* x, int* y, int* kierunek, int* plansza, int wiersze, int kolumny){
-	plansza[ (*x) * kolumny + *y] = 0;
+	plansza[ (*y) * kolumny + *x] = 0;
 	switch(*kierunek){
 		case 0:
 			*kierunek = 3;
@@ -58,8 +58,8 @@ int czarne(int* x, int* y, int* kierunek, int* plansza, int wiersze, int kolumny
 			break;
 		case 1:
 			*kierunek = 0;
-			if( *y < wiersze )
-				(*y)++;
+			if( *y > 0 )
+				(*y)--;
 			else
 				return 1;
 			break;
@@ -72,8 +72,8 @@ int czarne(int* x, int* y, int* kierunek, int* plansza, int wiersze, int kolumny
 			break;
 		case 3:
 			*kierunek = 2;
-			if(*y > 0)
-				(*y)--;
+			if(*y < wiersze)
+				(*y)++;
 			else
 				return 1;
 			break;
@@ -101,7 +101,7 @@ int Langton(int wiersze, int kolumny,int  l_iteracji, char kierunek_poczatkowy, 
 	druk(wiersze, kolumny, x, y, kierunek, plansza, przedrostek_pliku, 0);
 	for(int i = 0; i<l_iteracji; i++){
 
-		if ( plansza[x*kolumny + y] == 0){
+		if ( plansza[y*kolumny + x] == 0){
 			if ( biale(&x, &y, &kierunek, plansza, wiersze, kolumny) == 1)
 				return 1;
 				

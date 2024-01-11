@@ -1,82 +1,113 @@
 #include"druk.h"
 
-void pole(int wiersze, int kolumny, int x, int y, int kierunek, int* plansza, int i, int j, FILE *out){
-	if( j == y && i == x){
-		if(plansza[j*wiersze + i] == 1){
+// SQUARE_WHITE: 
+// SQUARE_BLACK:█
+// ARROW_NORTH_WHITE:△
+// ARROW_NORTH_BLACK:▲
+// ARROW_EAST_WHITE:▷
+// ARROW_EAST_BLACK:▶
+// ARROW_SOUTH_WHITE:▽
+// ARROW_SOUTH_BLACK:▼
+// ARROW_WEST_WHITE:◁
+// ARROW_WEST_BLACK:◀
+void pole(int wiersze, int kolumny, int x, int y, int kierunek, int* plansza, int k, int j, FILE *out){
+	if( j == y && k == x){
+		if(plansza[j*kolumny + k] == 1){
 			switch(kierunek){
 				case 0:
-					fprintf(out, "mrówka BN");
+					fprintf(out, "▲");
 					break; 
 				case 1:
-					fprintf(out, "mrówka BE");
+					fprintf(out, "▶");
 					break; 
 				case 2:
-					fprintf(out, "mrówka BS");
+					fprintf(out, "▼");
 					break; 
 				case 3:
-					fprintf(out, "mrówka BW");
+					fprintf(out, "◀");
 					break;
 			}
 		}
 		else{
 			switch(kierunek){
 				case 0:
-					fprintf(out, "mrówka WN");
+					fprintf(out, "△");
 					break; 
 				case 1:
-					fprintf(out, "mrówka WE");
+					fprintf(out, "▷");
 					break; 
 				case 2:
-					fprintf(out, "mrówka WS");
+					fprintf(out, "▽");
 					break; 
 				case 3:
-					fprintf(out, "mrówka WW");
+					fprintf(out, "◁");
 					break;
 			}
 		}
 	}
 	else{
-		if(plansza[j*wiersze + i] == 1){
-			fprintf(out, "B");
+		if(plansza[j*kolumny + k] == 1){
+			fprintf(out, "█");
 		}
 		else{
-			fprintf(out, "W");
+			fprintf(out, " ");
 		}
 	}
 }
 
 void mapa(int wiersze, int kolumny, int x, int y, int kierunek, int* plansza, FILE *out){
-	int i = 0;
+	int k = 0;
 	int j = 0;
-	
-	for(j = 0; j <= wiersze; j++){
-		for(i = 0; i <= kolumny; i++){
-			fprintf(out, "LG");
-			fprintf(out, "hor");
-			fprintf(out, "PG");
+	// LINE_VERTICAL:│
+	// LINE_HORIZONTAL:─
+	// LINE_DOWN_RIGHT:┌
+	// LINE_DOWN_LEFT:┐
+	// LINE_UP_RIGHT:└
+	// LINE_UP_LEFT:┘
+	for(j = 0; j < wiersze; j++){
+		for(k = 0; k < kolumny; k++){
+			fprintf(out, "┌");
+			fprintf(out, "─");
+			fprintf(out, "┐");
 		}
 		fprintf(out, "\n");
-		for(i = 0; i <= kolumny; i++){
-			fprintf(out, "ver");
-			pole(wiersze, kolumny, x, y, kierunek, plansza, i, j, out);
-			fprintf(out, "ver");
+		for(k = 0; k < kolumny; k++){
+			fprintf(out, "│");
+			pole(wiersze, kolumny, x, y, kierunek, plansza, k, j, out);
+			fprintf(out, "│");
 		}
 		fprintf(out, "\n");
-		for(i = 0; i <= kolumny; i++){
-			fprintf(out, "LD");
-			fprintf(out, "hor");
-			fprintf(out, "PD");
+		for(k = 0; k < kolumny; k++){
+			fprintf(out, "└");
+			fprintf(out, "─");
+			fprintf(out, "┘");
 		}
 		fprintf(out, "\n");
 	}
+	fprintf(out, "\n");
 }
 
 void druk(int wiersze, int kolumny, int x, int y, int kierunek, int* plansza, char* przedrostek_pliku, int i){
-	//fprintf(stderr, "i= %d. x=%d, y= %d\n", i+1, x, y);
-	//char nowy_plik[100];  
-    	//snprintf(nowy_plik, sizeof(nowy_plik), "%s-%d", przedrostek_pliku, i);
+	
+	FILE *out;
+	if (przedrostek_pliku != NULL) {
+        	char plik[100];
+        	sprintf(plik, "%s_%d.txt", przedrostek_pliku, i);
+        
+        	out = fopen(plik, "w");
 
-	//FILE *out = przedrostek_pliku =! NULL ? fopen( nowy_plik, "w" ) : stdout;
-	FILE *out = stdout;
+        	if (out == NULL) {
+            		fprintf(stderr, "Error opening file %s\n", plik);
+            		exit(EXIT_FAILURE);
+        	}
+    	} 
+    	else {
+        	out = stdout;
+    	}
+    	
 	mapa(wiersze, kolumny, x, y, kierunek, plansza, out);
+	
+	if (przedrostek_pliku != NULL) {
+        	fclose(out);
+    	}
 }

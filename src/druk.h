@@ -1,6 +1,7 @@
 #ifndef DRUK_H
 #define DRUK_H
 #include <stdio.h>
+#include <stdlib.h>
 #include <wchar.h>
 #include <locale.h>
 
