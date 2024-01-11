@@ -25,6 +25,23 @@ int* wczytaj(char* mapa, int* wiersze, int* kolumny, char* kierunek_poczatkowy, 
 	int* mapa1 = malloc( *wiersze * *kolumny * sizeof(int));	
 	//sprawdzanie jakiego koloru jest dana komórka (trzeba omijać rogi i pipe'y
 	//jeśli nie jest kwadratem to jest mrówką, switch jaką i z tego rzeczy
+	
+	long int a = 0;//to będzie aktualna komórka
+	
+	for(int i = 0; i<wiersze; i++){
+	
+	//omijamy linijkę (daszki)
+	//while (znak != \0 lub \n)
+	//if( znak != | )
+	//	sprawdzamy czy B, czy W, czy coś innego
+	//	jeśli B albo W to zapisujemy mapa1[a] = 0 lub 1;
+	//	a++;
+	//	jeśli jest to coś innego
+	//	no to switch jaka mrówka
+	//	zapisujemy jak wyżej (czy pole białe czy czarne i przesuwamy a)
+	//	określamy x,y mrówki, oraz kierunek_poczatkowy
+	
+	}
 
 	fclose(in);
 	return mapa1;
