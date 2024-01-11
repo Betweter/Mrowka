@@ -98,7 +98,7 @@ int Langton(int wiersze, int kolumny,int  l_iteracji, char kierunek_poczatkowy, 
 		losulosu(wiersze, kolumny, plansza, procent_przeszkod);
 
 	
-	druk(wiersze, kolumny, x, y, plansza, przedrostek_pliku, 0);
+	druk(wiersze, kolumny, x, y, kierunek, plansza, przedrostek_pliku, 0);
 	for(int i = 0; i<l_iteracji; i++){
 
 		if ( plansza[x*wiersze + y] == 0){
@@ -110,7 +110,7 @@ int Langton(int wiersze, int kolumny,int  l_iteracji, char kierunek_poczatkowy, 
 				return 1;
 				
 		}
-		druk(wiersze, kolumny, x, y, plansza, przedrostek_pliku, i);
+		druk(wiersze, kolumny, x, y, kierunek, plansza, przedrostek_pliku, i);
 	}	
 
 return 0;
