@@ -18,9 +18,9 @@ int czyLiczba (char* wyr){
 }
 
 int main(int argc, char** argv){
-	int wiersze = 50;
-	int kolumny = 50;
-	int l_iteracji = 200;
+	int wiersze = 6;
+	int kolumny = 6;
+	int l_iteracji = 10;
 	char kierunek_poczatkowy = 'N';
 	char* przedrostek_pliku = NULL;
 	int czy_losowo = 0;

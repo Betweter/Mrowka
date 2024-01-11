@@ -7,7 +7,7 @@ void losulosu(int wiersze, int kolumny, int* plansza, double procent_przeszkod){
 	
 	for(int i = 0; i < wiersze; i++)
 		for(int j = 0; j < kolumny; j++)
-			plansza[i*wiersze + j] = ( rand() % 100 ) < ( procent_przeszkod * 100 ) ? 1 : 0;
+			plansza[i*kolumny + j] = ( rand() % 100 ) < ( procent_przeszkod * 100 ) ? 1 : 0;
 		
 }
 
@@ -16,14 +16,14 @@ int biale(int* x, int* y, int* kierunek, int* plansza, int wiersze, int kolumny)
 	switch(*kierunek){
 		case 0:
 			*kierunek = 1;
-			if( *x < kolumny )
+			if( *x < kolumny - 1 )
 				(*x)++;
 			else
 				return 1;
 			break;
 		case 1:
 			*kierunek = 2;
-			if( *y < wiersze )
+			if( *y < wiersze - 1 )
 				(*y)++;
 			else
 				return 1;
@@ -65,14 +65,14 @@ int czarne(int* x, int* y, int* kierunek, int* plansza, int wiersze, int kolumny
 			break;
 		case 2:
 			*kierunek = 1;
-			if(*x < kolumny)
+			if(*x < kolumny - 1 )
 				(*x)++;
 			else
 				return 1;
 			break;
 		case 3:
 			*kierunek = 2;
-			if(*y < wiersze)
+			if(*y < wiersze - 1 )
 				(*y)++;
 			else
 				return 1;
