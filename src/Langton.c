@@ -102,15 +102,15 @@ int Langton(int wiersze, int kolumny,int  l_iteracji, char kierunek_poczatkowy, 
 	for(int i = 0; i<l_iteracji; i++){
 
 		if ( plansza[y*kolumny + x] == 0){
-			if ( biale(&x, &y, &kierunek, plansza, wiersze, kolumny) == 1)
+			if ( biale(&x, &y, &kierunek, plansza, wiersze, kolumny) == 1){
 				fprintf(stderr, "Mrówka weszła w ścianę :(\n");
 				return 1;
-				
+			}
 		} else {
-			if ( czarne(&x, &y, &kierunek, plansza, wiersze, kolumny) == 1)
+			if ( czarne(&x, &y, &kierunek, plansza, wiersze, kolumny) == 1){
 				fprintf(stderr, "Mrówka weszła w ścianę :(\n");
 				return 1;
-				
+			}
 		}
 		druk(wiersze, kolumny, x, y, kierunek, plansza, przedrostek_pliku, i);
 	}	
